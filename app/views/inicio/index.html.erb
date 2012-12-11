@@ -1,0 +1,37 @@
+
+<h1>Entre aqui com sua tabela verdade</h1>
+
+<h2>Tabelas salvas</h2>
+
+<table>
+  <tr>
+    <th>Nome</th>
+    <th></th>
+  </tr>
+
+<% @tabela.each do |tabela| %>
+  <tr>
+    <td><%= tabela.nome %></td>
+    <td><%= link_to "Definir tabela", "/show_tabela?id=#{tabela.id}"%></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<div id="criaTabela">
+	<%=form_tag '/salva_tabela' do %>
+	  
+	  <div class="input campo">
+		  <%= label_tag(:labelNome, "Nome da tabela: ") %> 
+		  <%= text_field_tag(:nome) %>
+	  </div>
+	  <div class="input campo">
+		  <%= label_tag(:labelVars, "Número de variáveis:") %> 
+		  <%= number_field_tag(:vars, nil, :in => 1...11) %>
+	  </div>
+	  	<div class='submitContato'><%=submit_tag 'Enviar', :id => 'envia'%></div>
+	  <br/>
+		
+	<% end %>
+</div>
