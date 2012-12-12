@@ -12,7 +12,14 @@
 <% @tabela.each do |tabela| %>
   <tr>
     <td><%= tabela.nome %></td>
-    <td><%= link_to "Definir tabela", "/show_tabela?id=#{tabela.id}"%></td>
+    <td>
+    	<%if tabela.saida_esperada.empty?%>
+    		<%= link_to "Definir", "/show_tabela?id=#{tabela.id}"%>
+    	<%else%>
+    		<%= link_to "Treinar rede", "/treino?id=#{tabela.id}"%>
+    	<%end%>
+    </td>
+    <td><%= link_to "Apagar", "/destroi_tabela?id=#{tabela.id}"%></td>
   </tr>
 <% end %>
 </table>

@@ -1,0 +1,11 @@
+
+<table id="rounded-corner">
+
+	<% @tabela_treino.each_with_index do |linha, i|%>
+	 <tr>
+	 	<%linha.each do |l|%>
+	 		<td><%= l%></td>
+	 	<%end%>
+	</tr>
+	<%end%>
+</table>

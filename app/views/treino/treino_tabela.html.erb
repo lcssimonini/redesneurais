@@ -1,0 +1,38 @@
+<h1><%= @tabela.nome%></h1>
+<h3><%= @tabela.vars%></h3>
+<br />
+<br />
+<table id="rounded-corner">
+	<tr>
+		<% for num in 1..@tabela.vars%>
+	  		<th><%= ("X"+num.to_s)%></th>
+	  	<%end%>
+	  	<th>Bias</th>
+	  	<th>Target</th>
+	</tr>
+	<% @tabela.linhas.each_with_index do |linha, i|%>
+	 <tr>
+	 	<%linha.each do |l|%>
+	 		<td><%= l%></td>
+	 	<%end%>
+	 	<td><%= @tabela.saida_esperada[i]%></td>
+	</tr>
+	<%end%>
+</table>
+<input type="button" value="Treinar" id="treinar_rede" />
+<%= link_to "inicio", "/"%>
+<div id="resultado"></div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#treinar_rede").click(function(){
+			treinar_rede();
+		});
+		treinar_rede = function(){
+			var id = "<%=raw @tabela.id%>"
+			$.post("/treinar_tabela",{id:id}, function(data){
+				$("#resultado").html(data);
+			});
+		}
+	});		
+</script>

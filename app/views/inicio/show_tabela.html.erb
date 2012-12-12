@@ -2,12 +2,12 @@
 <h1><%= @tabela.nome%></h1>
 <h3><%= @tabela.vars%></h3>
 <br />
-<br />
-<table>
+<table id="rounded-corner">
 	<tr>
 		<% for num in 1..@tabela.vars%>
 	  		<th><%= ("X"+num.to_s)%></th>
 	  	<%end%>
+	  	<th>Bias</th>
 	  	<th>Target</th>
 	</tr>
 	<% @tabela.linhas.each_with_index do |linha, i|%>
@@ -20,11 +20,16 @@
 	<%end%>
 </table>
 <input type="button" value="Salvar" id="salva_targets" />
+<%= link_to "inicio", "/"%>
+
+<div id="treino"></div>
 
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#salva_targets").click(function(){
-			selecionaTargets();
+			var targets = new Array();
+			targets = selecionaTargets();
+			salva_targets(targets);
 		});
 	});
 
@@ -33,6 +38,14 @@
 		$('.targets').each(function(){
 			targets.push($(this).val());
 		});
-		alert(targets);
+		return targets
+	}
+
+	salva_targets = function(targets){
+		var id = "<%=raw @tabela.id%>"
+		$.post("/salva_targets",{id:id, target:targets}, function(data){
+			alert("Target definido com sucesso!");
+			window.location = "/treino?id="+id
+		});
 	}
 </script>
