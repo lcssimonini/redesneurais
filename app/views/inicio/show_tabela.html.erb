@@ -1,3 +1,38 @@
 
-<span><%= @tabela.nome%></span>
-<span><%= @tabela.vars%></span>
+<h1><%= @tabela.nome%></h1>
+<h3><%= @tabela.vars%></h3>
+<br />
+<br />
+<table>
+	<tr>
+		<% for num in 1..@tabela.vars%>
+	  		<th><%= ("X"+num.to_s)%></th>
+	  	<%end%>
+	  	<th>Target</th>
+	</tr>
+	<% @tabela.linhas.each_with_index do |linha, i|%>
+	 <tr>
+	 	<%linha.each do |l|%>
+	 		<td><%= l%></td>
+	 	<%end%>
+	 	<td><%= select("t", i, [-1, 1], {:include_blank => true}, {:class => 'targets'}) %></td>
+	</tr>
+	<%end%>
+</table>
+<input type="button" value="Salvar" id="salva_targets" />
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#salva_targets").click(function(){
+			selecionaTargets();
+		});
+	});
+
+	selecionaTargets = function(){
+		var targets = new Array();
+		$('.targets').each(function(){
+			targets.push($(this).val());
+		});
+		alert(targets);
+	}
+</script>
