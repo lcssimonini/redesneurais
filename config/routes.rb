@@ -9,6 +9,8 @@ Redesneurais::Application.routes.draw do
   match "/salva_targets" => "inicio#salva_targets"
   match "/treino" => "treino#treino_tabela"
   match "/treinar_tabela" => "treino#treinar"
+  match "/testar_rede" => "treino#testar"
+
 
 
 end

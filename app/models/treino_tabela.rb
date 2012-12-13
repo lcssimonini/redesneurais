@@ -15,12 +15,10 @@ class TreinoTabela
 		linhas = self.tabela_verdade.linhas
 		targets = self.tabela_verdade.saida_esperada
 
-		# linhas.each_with_index do |linha, i|
 		for i in 0..(linhas.size-1)
 			linhaDeltaW = []
 			linhaW = []
 			for j in 0..(linhas[i].size-1)
-			# linha[].each_with_index do |coluna, j|
 				deltaW = linhas[i][j]*targets[i]
 				linhaDeltaW << deltaW
 				w = anterioresLinha[j]+deltaW
@@ -34,5 +32,27 @@ class TreinoTabela
 		self.pesos = wtotal.last
 		self.tabela_treino = tabela_completa
 		self.save
+	end
+
+	def testar
+		linhas = self.tabela_verdade.linhas
+		limiar = 0
+		net = Array.new
+		saida = Array.new
+		pesos = self.pesos
+		for i in 0..(linhas.size-1)
+			soma = 0
+			for j in 0..(linhas[i].size-1)
+				soma += linhas[i][j]*pesos[j]
+			end
+			net << soma
+			if soma < limiar
+				s = 0
+			else
+				s = 1
+			end
+			saida << s
+		end
+		return net, saida
 	end
 end

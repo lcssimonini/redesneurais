@@ -2,36 +2,75 @@
 <h3><%= @tabela.vars%></h3>
 <br />
 <br />
-<table id="rounded-corner">
-	<tr>
-		<% for num in 1..@tabela.vars%>
-	  		<th><%= ("X"+num.to_s)%></th>
-	  	<%end%>
-	  	<th>Bias</th>
-	  	<th>Target</th>
-	</tr>
-	<% @tabela.linhas.each_with_index do |linha, i|%>
-	 <tr>
-	 	<%linha.each do |l|%>
-	 		<td><%= l%></td>
-	 	<%end%>
-	 	<td><%= @tabela.saida_esperada[i]%></td>
-	</tr>
+<div id="tabela_salva" class="tabelas">
+	<table id="rounded-corner">
+		<tr>
+			<% for num in 1..@tabela.vars%>
+		  		<th><%= ("X"+num.to_s)%></th>
+		  	<%end%>
+		  	<th>Bias</th>
+		  	<th>Target</th>
+		</tr>
+		<% @tabela.linhas.each_with_index do |linha, i|%>
+		 <tr>
+		 	<%linha.each do |l|%>
+		 		<td><%= l%></td>
+		 	<%end%>
+		 	<td><%= @tabela.saida_esperada[i]%></td>
+		</tr>
+		<%end%>
+	</table>
+</div>
+<div id="resultado" class="tabelas">
+	<%if !@tabela.treino_tabela.tabela_treino.empty?
+		 tabela_treino = @tabela.treino_tabela.tabela_treino%>
+		<table id="rounded-corner">
+			<tr>
+				<% for num in 1..@tabela.vars%>
+			  		<th><%= ("deltaW"+num.to_s)%></th>
+			  	<%end%>
+			  	<th>deltaBias</th>
+			  	<% for num in 1..@tabela.vars%>
+			  		<th><%= ("W"+num.to_s)%></th>
+			  	<%end%>
+			  	<th>Bias</th>
+			</tr>
+			<% tabela_treino.each_with_index do |linha, i|%>			
+			 <tr>
+			 	<%linha.each do |l|%>
+			 		<td><%= l%></td>
+			 	<%end%>
+			</tr>
+			<%end%>
+		</table>
+		<input type="button" value="Testar" id="testar_rede" />
+	<%else%>
+		<input type="button" value="Treinar" id="treinar_rede" />
 	<%end%>
-</table>
-<input type="button" value="Treinar" id="treinar_rede" />
+</div>
+<div id="teste_tabela"></div>
+<input type="button" value="Testar" id="testar_rede" style="display:none;"/>
 <%= link_to "inicio", "/"%>
-<div id="resultado"></div>
 
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#treinar_rede").click(function(){
 			treinar_rede();
 		});
+		$("#testar_rede").click(function(){
+			testar_rede();
+		});
 		treinar_rede = function(){
 			var id = "<%=raw @tabela.id%>"
 			$.post("/treinar_tabela",{id:id}, function(data){
 				$("#resultado").html(data);
+				$("#testar_rede").show();
+			});
+		}
+		testar_rede = function(){
+			var id = "<%=raw @tabela.id%>"
+			$.post("/testar_rede",{id:id}, function(data){
+				$("#teste_tabela").html(data);
 			});
 		}
 	});		

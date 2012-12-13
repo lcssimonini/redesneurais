@@ -1,8 +1,17 @@
 
 <table id="rounded-corner">
-
+	<tr>
+		<% for num in 1..@vars%>
+	  		<th><%= ("deltaW"+num.to_s)%></th>
+	  	<%end%>
+	  	<th>deltaBias</th>
+	  	<% for num in 1..@vars%>
+	  		<th><%= ("W"+num.to_s)%></th>
+	  	<%end%>
+	  	<th>Bias</th>
+	</tr>
 	<% @tabela_treino.each_with_index do |linha, i|%>
-	 <tr>
+	<tr>
 	 	<%linha.each do |l|%>
 	 		<td><%= l%></td>
 	 	<%end%>

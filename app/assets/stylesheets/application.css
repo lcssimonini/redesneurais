@@ -56,3 +56,7 @@
  	background: #d0dafd;
  }
 
+ #tabela_salva, #resultado, #teste_tabela{
+ 	position: relative;
+ 	float: left;
+ }

@@ -9,6 +9,12 @@ class TreinoController < ApplicationController
 		@tabela = TabelaVerdade.find params[:id]
 		@tabela.treino_tabela.treinar
 		@tabela_treino = @tabela.treino_tabela.tabela_treino
+		@vars = @tabela.vars
 		@tabela.save
+	end
+
+	def testar
+		@tabela = TabelaVerdade.find params[:id]
+		@net, @saida = @tabela.treino_tabela.testar
 	end
 end
