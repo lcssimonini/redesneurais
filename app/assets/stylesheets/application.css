@@ -12,6 +12,28 @@
  *= require_tree .
  */
 
+ * {
+ 	outline:none;
+ 	font-family: Arial;
+ 	font-size: 16px;
+ }
+
+ h1 {
+ 	height:40px;
+ 	color: #4da3b4;
+ 	font-size: 1.625em;
+ 	line-height: 40px;
+ }
+ h2 {
+ 	color:#4da3b4;
+ 	font-size: 1.25em;
+ 	margin-bottom: 0.33em;
+ }
+ h3{
+ 	color: #8d8d8d;;
+ 	font-size: .925em;
+ }
+
  #rounded-corner
  {
  	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
