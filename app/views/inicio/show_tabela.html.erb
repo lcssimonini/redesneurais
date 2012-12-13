@@ -1,6 +1,6 @@
 
 <h1><%= @tabela.nome%></h1>
-<h3><%= @tabela.vars%></h3>
+<h3>Variáveis de entrada: <%= @tabela.vars%></h3>
 <br />
 <table id="rounded-corner">
 	<tr>
@@ -19,8 +19,8 @@
 	</tr>
 	<%end%>
 </table>
-<input type="button" value="Salvar" id="salva_targets" />
-<%= link_to "inicio", "/"%>
+<input type="button" value="Salvar Saídas" id="salva_targets" class="comandos"/>
+<%= link_to "Página inicial", "/", :class => "inicio"%>
 
 <div id="treino"></div>
 
@@ -44,7 +44,6 @@
 	salva_targets = function(targets){
 		var id = "<%=raw @tabela.id%>"
 		$.post("/salva_targets",{id:id, target:targets}, function(data){
-			alert("Target definido com sucesso!");
 			window.location = "/treino?id="+id
 		});
 	}

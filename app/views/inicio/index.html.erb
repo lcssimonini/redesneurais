@@ -1,6 +1,6 @@
 
-<h1>Treinamento de redes por meio da regra de Hebb</h1>
-<p>Trabalho desenvolvido pelos alunos Lucas Costa Silva Simonini e Aline Gonçalves Fernandes</p>
+<h1>Treinamento de redes através da Teoria Hebbiana</h1>
+<h2>Trabalho desenvolvido pelos alunos Lucas Costa Silva Simonini e Aline Gonçalves Fernandes</h2>
 <h3>Instruções: </h3>
 <ul>
   <li>Digite o nome da tabela e o numero de variáveis de entrada e clique enviar</li>
@@ -13,7 +13,7 @@
 
 
 <h2>Tabelas salvas</h2>
-<table>
+<table id = "index_tabelas">
   <tr>
     <th>Nome</th>
     <th></th>
@@ -47,7 +47,7 @@
 		  <%= label_tag(:labelVars, "Número de variáveis:") %> 
 		  <%= number_field_tag(:vars, nil, :in => 1...11) %>
 	  </div>
-	  	<div class='submitContato'><%=submit_tag 'Enviar', :id => 'envia'%></div>
+	  	<div class='submitContato'><%=submit_tag 'Criar tabela', :id => 'envia', :class => "cria_tabela"%></div>
 	  <br/>
 		
 	<% end %>

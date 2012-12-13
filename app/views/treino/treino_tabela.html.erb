@@ -1,5 +1,5 @@
 <h1><%= @tabela.nome%></h1>
-<h3><%= @tabela.vars%></h3>
+<h3>Variáveis de entrada: <%= @tabela.vars%></h3>
 <br />
 <br />
 <div id="tabela_salva" class="tabelas">
@@ -43,14 +43,15 @@
 			</tr>
 			<%end%>
 		</table>
-		<input type="button" value="Testar" id="testar_rede" />
+		</div>
+		<input type="button" value="Testar Rede" id="testar_rede" class="comandos"/>
 	<%else%>
-		<input type="button" value="Treinar" id="treinar_rede" />
+	</div>
+		<input type="button" value="Treinar Rede" id="treinar_rede" class="comandos" />
 	<%end%>
-</div>
 <div id="teste_tabela"></div>
-<input type="button" value="Testar" id="testar_rede" style="display:none;"/>
-<%= link_to "inicio", "/"%>
+<input type="button" value="Testar Rede" id="testar_rede" style="display:none;" class="comandos"/>
+<%= link_to "Página inicial", "/", :class => "inicio"%>
 
 <script type="text/javascript">
 	$(document).ready(function(){

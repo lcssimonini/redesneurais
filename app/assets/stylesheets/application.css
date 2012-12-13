@@ -21,18 +21,68 @@
  h1 {
  	height:40px;
  	color: #4da3b4;
- 	font-size: 1.625em;
+ 	font-size: 30px;
  	line-height: 40px;
  }
  h2 {
  	color:#4da3b4;
- 	font-size: 1.25em;
+ 	font-size: 20px;
  	margin-bottom: 0.33em;
  }
  h3{
  	color: #8d8d8d;;
- 	font-size: .925em;
+ 	font-size: 15px;
  }
+ a{
+ 	color: #000;
+ 	text-decoration: none;
+ 	padding: 4px;
+ 	font-size: 14px;
+ 	margin: 2px;
+ }
+
+ a:visited {
+    color: #666;
+ }
+
+ a:hover {
+    color: #fff;
+    background-color: #4da3b4;;
+ }
+
+
+ .inicio{
+ 	position: absolute;
+	top: 102px;
+	left: 15px;
+	font-size: 14px;
+ }
+
+ .comandos{
+ 	position: absolute;
+	top: 100px;
+	left: 135px;
+	font-size: 18px;
+	width: 140px;
+	height: 30px;
+ }
+
+ .cria_tabela{
+ 	font-size: 18px;
+	width: 140px;
+	height: 30px;
+ }
+
+ #index_tabelas td{
+ 	font-size: 16px;
+ 	border: solid 1px #ccc;
+ 	padding: 4px;
+ }
+
+ #index_tabelas td:hover{
+ 	background-color: #4da3b4
+ }
+
 
  #rounded-corner
  {
