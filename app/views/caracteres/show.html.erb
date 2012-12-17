@@ -1,0 +1,96 @@
+
+
+<h1><%= @letra.nome%></h1>
+<br />
+<table id="rounded-corner">
+	<tr>
+		<% for num in 1..25%>
+	  		<th><%= (num.to_s)%></th>
+	  	<%end%>
+	  	<th>Bias</th>
+	  	<th>Target</th>
+	</tr>
+	<tr>
+		<% @letra.linhas.each do |linha|%>
+			<td><%= linha%></td>
+		<%end%>
+		<td><%= @letra.saida_esperada.first%></td>
+	</tr>
+</table>
+<%if !@letra.treino_tabela.tabela_treino.empty?%>
+	<table id="rounded-corner">
+		<tr>
+			<% for num in 1..@letra.vars%>
+		  		<th><%= ("deltaW"+num.to_s)%></th>
+		  	<%end%>
+		  	<th>deltaBias</th>
+		  	<% for num in 1..@letra.vars%>
+		  		<th><%= ("W"+num.to_s)%></th>
+		  	<%end%>
+		  	<th>Bias</th>
+		</tr>
+		<tr>
+		<% @letra.treino_tabela.tabela_treino.each do |linha|%>
+		 	<td><%= linha%></td>
+		<%end%>
+		</tr>
+	</table>
+<%end%>
+<%= link_to "Página inicial", "/", :class => "inicio"%>
+<div id = "resultado"></div>
+<div id="form_teste" style="display:none;"></div>
+<div id = "teste_tabela">
+	<div id = "salva_letra" style="width: 120px;">
+	    <% for i in 0..4 %>
+	        <%for j in 0..4%>
+	            <input type="checkbox" class="letra" linha="<%= i%>" coluna="<%= j%>">
+	            <%if j==4 %>
+	                <br />
+	            <%end%>
+	        <%end%>
+	    <%end%>
+	    <input type="button" class="testar_letra" value="Testar Letra">
+	</div>
+	<div id ="resultado_teste" class="teste_letra"></div>
+</div>
+<input type="button" value="Testar Rede" id="testar_rede" class="comandos"/>
+<input type="button" value="Treinar Rede" id="treinar_rede" class="comandos" />
+
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(document).ready(function(){
+			$("#treinar_rede").click(function(){
+				treinar_rede();
+			});
+			$(".testar_letra").click(function(){
+				testar_rede();
+			});
+			treinar_rede = function(){
+				var id = "<%=raw @letra.id%>"
+				$.post("/treinar_tabela",{id:id}, function(data){
+					$("#resultado").html(data);
+					$("#testar_rede").show();
+					$("#treinar_rede").hide();
+					$("#form_teste").show();
+				});
+			}
+			testar_rede = function(){
+				var caracteres = new Array();
+	           	caracteres = [];
+	           	$(".letra").each(function(index, e){
+	           	    if($(e).is(':checked')){
+	          	        caracteres.push(1);
+	            	}else{
+	                   caracteres.push(-1);
+	                }
+	            });
+	            caracteres.push(1);
+	            var id = "<%=raw @letra.id%>"
+	            $.post("/testar_rede",{id:id, linha: caracteres}, function(data){
+	                $("#resultado_teste").html(data);
+	            });
+			}
+		});		
+	});	
+</script>

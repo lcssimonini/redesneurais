@@ -10,7 +10,9 @@ Redesneurais::Application.routes.draw do
   match "/treino" => "treino#treino_tabela"
   match "/treinar_tabela" => "treino#treinar"
   match "/testar_rede" => "treino#testar"
-
+  match "/caracteres" => "caracteres#index"
+  match "/salva_letra" => "caracteres#salva_letra"
+  match "/show_letra" => "caracteres#show"
 
 
 end

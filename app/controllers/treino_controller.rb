@@ -7,7 +7,11 @@ class TreinoController < ApplicationController
 
 	def treinar
 		@tabela = TabelaVerdade.find params[:id]
-		@tabela.treino_tabela.treinar
+		if @tabela.letra?
+			@tabela.treino_tabela.treinar_letra
+		else
+			@tabela.treino_tabela.treinar
+		end
 		@tabela_treino = @tabela.treino_tabela.tabela_treino
 		@vars = @tabela.vars
 		@tabela.save
@@ -15,6 +19,11 @@ class TreinoController < ApplicationController
 
 	def testar
 		@tabela = TabelaVerdade.find params[:id]
-		@net, @saida = @tabela.treino_tabela.testar
+		if @tabela.letra?
+			arg = params[:linha].map{|x| x.to_i}
+			@net, @saida = @tabela.treino_tabela.testar_letra arg
+		else
+			@net, @saida = @tabela.treino_tabela.testar
+		end
 	end
 end

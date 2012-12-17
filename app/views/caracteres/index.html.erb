@@ -1,0 +1,34 @@
+
+
+<div id = "salva_letra">
+    <% for i in 0..4 %>
+        <%for j in 0..4%>
+            <input type="checkbox" class="letra" linha="<%= i%>" coluna="<%= j%>">
+            <%if j==4 %>
+                <br />
+            <%end%>
+        <%end%>
+    <%end%>
+    <%= select("letra", i, ["X", "O"], {:include_blank => true}, {:class => 'letras'}) %>
+    <input type="button" class="submit_letra" value="Salvar Letra"  >
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        var caracteres = new Array();
+        $(".submit_letra").click(function(){
+            caracteres = [];
+            $(".letra").each(function(index, e){
+                if($(e).is(':checked')){
+                    caracteres.push(1);
+                }else{
+                    caracteres.push(-1);
+                }
+            });
+            var nome = $(".letras").val();
+            $.post("/salva_letra",{nome: nome ,linha: caracteres}, function(data){
+                window.location = "/show_letra?id="+data.id
+            });
+        });
+    });
+</script>
